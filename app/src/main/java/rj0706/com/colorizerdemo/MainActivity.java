@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int IMG_REQUEST=123;
     private Bitmap bitmap;
     private Uri path;
-    private ResponseBody filename;
+    private String filename;
 
     int serverResponseCode = 0;
     ProgressDialog dialog = null;
@@ -116,9 +116,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    filename=response.body();
-                    Toast.makeText(MainActivity.this,filename.toString(),Toast.LENGTH_SHORT).show();
-                    String DownloadUrl="http://610cddab.ngrok.io/colored/"+filename.toString();
+                    try {
+                        filename=response.body().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    String DownloadUrl="http://76ea8bf6.ngrok.io/colored/"+filename.toString();
+                    Toast.makeText(MainActivity.this,DownloadUrl,Toast.LENGTH_SHORT).show();
                     Picasso.get().load(DownloadUrl).into(img);
                 }
 

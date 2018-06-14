@@ -10,7 +10,7 @@ import retrofit2.http.Part;
 public interface ApiInterface {
 
     @Multipart
-    @POST("http://610cddab.ngrok.io/upload/")
+    @POST("upload")
     Call<ResponseBody> uploadImage(
             @Part MultipartBody.Part photo
     );

@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String filePath="";
             if(Build.VERSION.SDK_INT>=26){
                 final String[] split = path.getPath().split(":");//split the path.
-                filePath = split[1];
+                filePath = "storage/emulated/0/"+split[1];
             }else{
                 filePath=PathUtil.getPath(this,path);
             }
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             MultipartBody.Part file=MultipartBody.Part.createFormData("photo",originalfile.getName(), filepart);
 
-            String baseUrl="http://76ea8bf6.ngrok.io/";
+            String baseUrl="http://f38722c5.ngrok.io/";
             Retrofit retrofit= new Retrofit.Builder().baseUrl(baseUrl).
                     addConverterFactory(GsonConverterFactory.create()).build();
 
@@ -121,14 +121,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    String DownloadUrl="http://76ea8bf6.ngrok.io/colored/"+filename.toString();
+                    String DownloadUrl="http://f38722c5.ngrok.io/colored/"+filename.toString();
                     Toast.makeText(MainActivity.this,DownloadUrl,Toast.LENGTH_SHORT).show();
                     Picasso.get().load(DownloadUrl).into(img);
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Toast.makeText(MainActivity.this,"no"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             });
         } catch (URISyntaxException e) {

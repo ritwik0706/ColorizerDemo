@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             MultipartBody.Part file=MultipartBody.Part.createFormData("photo",originalfile.getName(), filepart);
 
-            String baseUrl="http://f38722c5.ngrok.io/";
+            String baseUrl="http://ec2-52-206-2-242.compute-1.amazonaws.com/";
             Retrofit retrofit= new Retrofit.Builder().baseUrl(baseUrl).
                     addConverterFactory(GsonConverterFactory.create()).build();
 
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    String DownloadUrl="http://f38722c5.ngrok.io/colored/"+filename.toString();
+                    String DownloadUrl="http://ec2-52-206-2-242.compute-1.amazonaws.com/colored/"+filename.toString();
                     Toast.makeText(MainActivity.this,DownloadUrl,Toast.LENGTH_SHORT).show();
                     Picasso.get().load(DownloadUrl).into(img);
                 }
